@@ -1,0 +1,27 @@
+version: "3.9"
+services:
+#  reddit-scraper:
+#    container_name: reddit-scraper
+#    image: maven:3.8.6-eclipse-temurin-17
+#    command: mvn spring-boot:run
+#    ports:
+#      - "8080:8080"
+#    volumes:
+#      - ".:/usr/src/app:rw"
+#      - "/mnt/c/Users/Jimmy Fennelly/.m2":/root/.m2
+#    working_dir: /usr/src/app
+#    environment:
+#      - SPRING_DATASOURCE_URL=jdbc:sqlserver://database;databaseName=spring-boot;encrypt=true;trustServerCertificate=true;
+#      - SPRING_DATASOURCE_USERNAME=sa
+#      - SPRING_DATASOURCE_PASSWORD=P@ssw0rd!
+#    depends_on:
+#      - database
+  database:
+    container_name: database
+    image: jftech/sql-server
+    build: ./src/main/resources/db
+    environment:
+      - SA_PASSWORD=P@ssw0rd!
+      - ACCEPT_EULA=Y
+    ports:
+      - "1433:1433"
