@@ -1,10 +1,6 @@
 /* Copyright 2023 Jimmy Fennelly */
 package com.jftech.reddit.scraper.api.quartz;
 
-import java.io.IOException;
-import java.util.Objects;
-import java.util.Properties;
-import javax.sql.DataSource;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.config.PropertiesFactoryBean;
@@ -16,12 +12,14 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
-import org.springframework.core.env.Environment;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.PlatformTransactionManager;
+
+import javax.sql.DataSource;
+import java.io.IOException;
+import java.util.Properties;
 
 @Slf4j
 @Component
