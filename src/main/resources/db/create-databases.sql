@@ -6,3 +6,12 @@ GO
 
 CREATE SCHEMA [data];
 GO
+
+CREATE DATABASE [quartz]
+GO
+
+USE [quartz];
+GO
+
+CREATE SCHEMA [data];
+GO

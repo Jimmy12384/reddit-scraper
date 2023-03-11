@@ -2,6 +2,7 @@
 package com.jftech.reddit.scraper.api.quartz;
 
 import java.io.IOException;
+import java.util.Objects;
 import java.util.Properties;
 import javax.sql.DataSource;
 import lombok.RequiredArgsConstructor;
@@ -9,11 +10,15 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.config.PropertiesFactoryBean;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.quartz.QuartzDataSource;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
+import org.springframework.core.env.Environment;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -30,13 +35,7 @@ public class SpringQuartzSchedulerConfig {
     private final ApplicationContext applicationContext;
 
     @Bean
-    @QuartzDataSource
-    public DataSource quartzDataSource() {
-        return DataSourceBuilder.create().build();
-    }
-
-    @Bean
-    public SchedulerFactoryBean quartzScheduler() {
+    public SchedulerFactoryBean quartzSchedulerBean() {
         SchedulerFactoryBean quartzScheduler = new SchedulerFactoryBean();
 
         quartzScheduler.setDataSource(dataSource);

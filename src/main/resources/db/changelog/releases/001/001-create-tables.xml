@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog logicalFilePath="db.changelog-1.0.xml" xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd">
+    <changeSet author="jfennelly" id="init-forum-thread-table">
+        <comment>Creates the forum thread table</comment>
+        <createSequence schemaName="data" sequenceName="forum_thread_seq" startValue="0"/>
+        <createTable schemaName="data" tableName="forum_thread">
+            <column name="forum_thread_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="title" type="VARCHAR(MAX)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="author" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="url" type="VARCHAR(MAX)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by_timestamp" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="jfennelly" id="init-campaign-table">
+        <comment>Creates the campaign table</comment>
+        <createSequence schemaName="data" sequenceName="campaign_seq" startValue="0"/>
+        <createTable schemaName="data" tableName="campaign">
+            <column name="campaign_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="title" type="VARCHAR(MAX)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="VARCHAR(MAX)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by_timestamp" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet author="jfennelly" id="init-campaign-options-table">
+        <comment>Creates the campaign options table</comment>
+        <createSequence schemaName="data" sequenceName="campaign_option_seq" startValue="0"/>
+        <createTable schemaName="data" tableName="campaign_option">
+            <column name="campaign_option_id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="campaign_id" type="BIGINT">
+                <constraints nullable="false"
+                             foreignKeyName="fk_campaign_campaign_option"
+                             referencedTableSchemaName="data"
+                             referencedTableName="campaign"
+                             referencedColumnNames="campaign_id"
+                />
+            </column>
+            <column name="key" type="VARCHAR(MAX)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="value" type="VARCHAR(MAX)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by_timestamp" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>

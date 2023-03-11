@@ -12,7 +12,7 @@ import lombok.EqualsAndHashCode;
 public class RedditThread extends TemporalEntity {
 
     @Id
-    @Column(name = "thread_id")
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "thread_generator")
     @SequenceGenerator(name = "thread_generator", sequenceName = "thread_seq")
     private Long id;

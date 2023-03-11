@@ -16,12 +16,18 @@ services:
 #      - SPRING_DATASOURCE_PASSWORD=P@ssw0rd!
 #    depends_on:
 #      - database
-  database:
-    container_name: database
-    image: jftech/sql-server
-    build: ./src/main/resources/db
+  sql-server:
+    container_name: sql-server
+    image: mcr.microsoft.com/mssql/server:2022-latest
     environment:
       - SA_PASSWORD=P@ssw0rd!
       - ACCEPT_EULA=Y
+      - MSSQL_PID=Express
     ports:
       - "1433:1433"
+    volumes:
+      - dbdata:/var/opt/sqlserver/datagit com
+      - ./src/main/resources/db:/usr/src/app
+    command: [ "/bin/bash", "/usr/src/app/entry-point.sh" ]
+volumes:
+  dbdata:
